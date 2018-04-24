@@ -7,12 +7,15 @@ public class BowlingGameTest {
 
     BowlingGame game = new BowlingGame();
 
+    public void rollMany(int numberRolls, int numberPins) {
+        for (int i = 0; i < numberRolls; i++) {
+            game.roll(numberPins);
+        }
+    }
+    
     @Test
     public void queDesGoutieresDonne0Points() {
-    	int i;        
-        for(i=0;i<11;i++){        
-            game.roll(0);
-        }
+    	rollMany(11,0);
         assertEquals(0, game.getScore());
     }
 
@@ -26,11 +29,8 @@ public class BowlingGameTest {
     @Test
     public void queDesStrikes(){
     	
-    	//La partie max se fait en 11 (ou 12) strikes soit 300 points
-    	int i;        
-        for(i=1;i<12;i++){        
-            game.roll(10);
-        }
+    	//La partie max se fait en 12 strikes soit 300 points
+    	rollMany(12,10);
         
         assertEquals(300, game.getScore());
     }
@@ -53,6 +53,20 @@ public class BowlingGameTest {
         game.roll(5);
         
         assertEquals(30, game.getScore());
+    } 
+
+    @Test
+    public void bonusDuStrike2Fois(){
+        game.roll(8);
+        game.roll(0);
+        game.roll(10);
+        game.roll(1);
+        game.roll(5);
+        game.roll(10);
+        game.roll(2);
+        game.roll(7);
+        
+        assertEquals(58, game.getScore());
     } 
 
     @Test
@@ -102,11 +116,14 @@ public class BowlingGameTest {
         game.roll(10);//8 = 123
 
         game.roll(10);//9 = 153
+        
+        //Plus de bonus sur les anciens lancer
+        game.roll(10);//10 Pour 3 = 162 Pour 10 = 183 Pour 10 = 183
 
-        game.roll(10);//10 = 183
+        game.roll(8);//11 Pour 7 = 176 Pour 3 = 189 Pour 10 = 203
 
-        game.roll(10);//11 = 213
+        game.roll(10);//12 Pour 5 = 181 Pour 6 = 195 Pour 10 = 213
                 
-        assertEquals(213, game.getScore());
+        assertEquals(195, game.getScore());
     }
 }
