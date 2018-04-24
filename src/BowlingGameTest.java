@@ -124,6 +124,6 @@ public class BowlingGameTest {
 
         game.roll(10);//12 Pour 5 = 181 Pour 6 = 195 Pour 10 = 213
                 
-        assertEquals(195, game.getScore());
+        assertEquals(209, game.getScore());
     }
 }
