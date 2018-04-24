@@ -1,0 +1,38 @@
+CleanCode By Rémi Foyard
+Règles
+
+	public int rmsurd(moyfi){
+	Resultats res = new Resultats();
+	res.moyfi = moyfi / 10;
+	insert res;
+	return res;
+	}
+	
+	//Nom incomprehensible, non prononcable !
+	//Utiliser une norme comme camelCase
+	//verifier que la variable ne soit pas null 
+	//Il n'y a pas de commentaire
+	//on sépare les couches d'abstraction
+	//Mauvaise indentation
+	
+	
+	AMELIORATIONS :
+	
+	//Retourne la moyenne divisé par 10
+	public int retourneMoySurDix(moyFinale != null){
+		if(moyFinale != null){
+			resultat = moyFinale / 10;
+		}
+		else resulat = 0;
+		
+		insererMoyFinale(moyFinale)
+		return resulat;
+	}
+	
+	//Insert une moyenne dans la BDD
+	public void insererMoyFinale(moyFinale){
+		Resultats resultat = new Resultats();
+		resultat.moyfi = moyFinale;
+		insert resultat;
+	}
+	
