@@ -1,3 +1,5 @@
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -9,7 +11,11 @@ public class BowlingGameTest {
 
     public void rollMany(int numberRolls, int numberPins) {
         for (int i = 0; i < numberRolls; i++) {
-            game.roll(numberPins);
+            try {
+            	game.roll(numberPins);
+            } catch(BowlingException e){
+            	
+            }
         }
     }
     
@@ -17,6 +23,102 @@ public class BowlingGameTest {
     public void queDesGoutieresDonne0Points() {
     	rollMany(11,0);
         assertEquals(0, game.getScore());
+    }
+
+    @Test
+    public void finPartieA20True() {
+    	rollMany(9,10);
+        game.roll(3);
+        game.roll(3);
+
+    	assertTrue(game.getFinPartie());
+    }
+    
+    @Test
+    public void finPartieA20False() {
+    	rollMany(9,10);
+        game.roll(3);
+        game.roll(7);
+
+    	assertFalse(game.getFinPartie());
+    }
+
+    @Test
+    public void finPartieA21True() {
+    	rollMany(9,10);
+        game.roll(3);
+        game.roll(7);
+        game.roll(7);
+
+    	assertTrue(game.getFinPartie());
+    }
+
+    @Test
+    public void finPartieA21True2() {
+    	rollMany(9,10);
+        game.roll(3);
+        game.roll(7);
+        game.roll(10);
+
+    	assertTrue(game.getFinPartie());
+    }
+    
+    @Test
+    public void finPartieA21False() {
+    	rollMany(9,10);
+        game.roll(10);
+        game.roll(10);
+
+    	assertFalse(game.getFinPartie());
+    }
+
+    @Test
+    public void finPartieA22True() {
+    	rollMany(9,10);
+        game.roll(10);
+        game.roll(7);
+        game.roll(3);
+
+    	assertTrue(game.getFinPartie());
+    }
+
+    @Test
+    public void finPartieA22True2() {
+    	rollMany(9,10);
+        game.roll(10);
+        game.roll(7);
+        game.roll(1);
+
+    	assertTrue(game.getFinPartie());
+    }
+    
+    @Test
+    public void finPartieA22False() {
+    	rollMany(9,10);
+        game.roll(10);
+        game.roll(10);
+
+    	assertFalse(game.getFinPartie());
+    }
+
+    @Test
+    public void finPartieA23True() {
+    	rollMany(9,10);
+        game.roll(10);
+        game.roll(10);
+        game.roll(1);
+
+    	assertTrue(game.getFinPartie());
+    }
+
+    @Test
+    public void finPartieA23True2() {
+    	rollMany(9,10);
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
+
+    	assertTrue(game.getFinPartie());
     }
 
     @Test
@@ -120,10 +222,10 @@ public class BowlingGameTest {
         //Plus de bonus sur les anciens lancer
         game.roll(10);//10 Pour 3 = 162 Pour 10 = 183 Pour 10 = 183
 
-        game.roll(8);//11 Pour 7 = 176 Pour 3 = 189 Pour 10 = 203
+        game.roll(7);//11 Pour 7 = 176 Pour 3 = 189 Pour 10 = 203
 
-        game.roll(10);//12 Pour 5 = 181 Pour 6 = 195 Pour 10 = 213
+        game.roll(3);//12 Pour 5 = 181 Pour 6 = 195 Pour 10 = 213
                 
-        assertEquals(209, game.getScore());
+        assertEquals(200, game.getScore());
     }
 }
